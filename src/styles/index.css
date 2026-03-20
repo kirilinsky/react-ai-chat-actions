@@ -60,3 +60,13 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.ca-spinner {
+  animation: ca-spin 0.8s linear infinite;
+}
+
+@keyframes ca-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,3 +1,4 @@
+import { Loader } from "lucide-react";
 import { ActionButtonProps } from "../../types";
 
 export const ActionButton = ({
@@ -16,7 +17,7 @@ export const ActionButton = ({
       onClick={onClick}
       aria-label={label}
     >
-      {loading ? "loading..." : icon}
+      {loading ? <Loader size={16} className="ca-spinner" /> : icon}
     </button>
   );
 };

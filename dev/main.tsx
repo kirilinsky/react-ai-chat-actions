@@ -8,6 +8,7 @@ createRoot(document.getElementById("root")!).render(
   <ActionBar
     messageId="msg-1"
     visible={true}
+    //loading={['like']}
     actions={[
       "like",
       "dislike",

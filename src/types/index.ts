@@ -9,6 +9,7 @@ export type ActionType =
   | "options"
   | "pin"
   | "divider";
+export type ActionTypeFiltered = Exclude<ActionType, "divider">;
 
 export type ActionButtonProps = {
   icon?: ReactNode;
@@ -19,10 +20,13 @@ export type ActionButtonProps = {
   loading?: boolean;
 };
 
+export type ActionButtonOptions = { loading?: boolean; disabled?: boolean };
 export type ActionBarProps = {
   messageId: string;
   visible?: boolean;
   actions: ActionType[];
+  loading?: ActionTypeFiltered[];
+  disabled?: ActionTypeFiltered[]; 
   onAction: (messageId: string, action: ActionType) => void;
 };
 

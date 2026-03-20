@@ -27,6 +27,8 @@ export const ActionBar = ({
   actions,
   onAction,
   visible,
+  loading,
+  disabled,
 }: ActionBarProps) => {
   const { isActive, handleAction } = useChatActions({ messageId, onAction });
 
@@ -39,11 +41,14 @@ export const ActionBar = ({
         }
         let meta = buttonsMeta[action];
         let active = isActive(action);
+
         return (
           <ActionButton
             key={action}
             {...meta}
             active={active}
+            loading={loading?.includes(action)}
+            disabled={disabled?.includes(action)}
             onClick={() => handleAction(action)}
           />
         );
