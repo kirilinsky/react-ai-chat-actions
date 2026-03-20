@@ -19,7 +19,7 @@
     "build": "tsdown",
     "dev": "vite dev",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "npx storybook build"
   },
   "repository": {
     "type": "git",
