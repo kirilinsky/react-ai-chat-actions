@@ -10,6 +10,7 @@ import {
 import { ActionBarProps, ActionButtonMeta, ActionType } from "../../types";
 import ActionButton from "../action-button/action-button";
 import useChatActions from "../../hooks/use-chat-actions";
+import { Tooltip } from "../tooltip/tooltip";
 
 const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
   like: { icon: <ThumbsUp size={16} />, label: "Like" },
@@ -43,14 +44,15 @@ export const ActionBar = ({
         let active = isActive(action);
 
         return (
-          <ActionButton
-            key={action}
-            {...meta}
-            active={active}
-            loading={loading?.includes(action)}
-            disabled={disabled?.includes(action)}
-            onClick={() => handleAction(action)}
-          />
+          <Tooltip label={meta.label} key={action}>
+            <ActionButton
+              {...meta}
+              active={active}
+              loading={loading?.includes(action)}
+              disabled={disabled?.includes(action)}
+              onClick={() => handleAction(action)}
+            />
+          </Tooltip>
         );
       })}
     </div>
