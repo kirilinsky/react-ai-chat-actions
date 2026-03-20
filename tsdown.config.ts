@@ -5,7 +5,14 @@ export default defineConfig({
   format: ["esm", "cjs"],
   dts: true,
   clean: true,
+  outExtensions: () => ({
+    dts: ".d.ts",
+  }),
   external: ["react", "react-dom"],
   minify: true,
   sourcemap: true,
+  css: {
+    inject: true,
+    minify: true,
+  },
 });

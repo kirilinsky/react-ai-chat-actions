@@ -44,7 +44,11 @@ export const ActionBar = ({
         let active = isActive(action);
 
         return (
-          <Tooltip label={meta.label} key={action}>
+          <Tooltip
+            disabled={disabled?.includes(action)}
+            label={meta.label}
+            key={action}
+          >
             <ActionButton
               {...meta}
               active={active}

@@ -1,0 +1,20 @@
+export type ThemeToken =
+  | '--ca-barBg'
+  | '--ca-barShadow'
+  | '--ca-barBorder'
+  | '--ca-barRadius'
+  | '--ca-btnColor'
+  | '--ca-btnHoverBg'
+  | '--ca-btnActiveBg'
+  | '--ca-btnActiveColor'
+  | '--ca-btnActiveGlow'
+  | '--ca-btnRadius'
+  | '--ca-dividerColor'
+  | '--ca-tooltipBg'
+  | '--ca-tooltipColor'
+
+export type ThemeName =
+  | 'square'
+  | 'light'
+  | 'dark'
+  | 'neon'

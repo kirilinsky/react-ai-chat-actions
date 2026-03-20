@@ -1,6 +1,6 @@
 import { defineThemes } from "var-th";
 
-export const { inject, getVarths, themeNames } = defineThemes({
+export const { toCSS, toTypes, getVarths, themeNames } = defineThemes({
   prefix: "ca",
   tokens: [
     "barBg",
@@ -80,5 +80,3 @@ export const { inject, getVarths, themeNames } = defineThemes({
     ],
   },
 });
-
-inject();

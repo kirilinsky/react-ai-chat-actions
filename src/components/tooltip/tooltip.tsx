@@ -3,10 +3,13 @@ import { ReactNode, useRef, useState } from "react";
 export const Tooltip = ({
   label,
   children,
+  disabled = false,
 }: {
   label: string;
   children: ReactNode;
+  disabled?: boolean;
 }) => {
+  if (disabled) return children;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
 
