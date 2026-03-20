@@ -6,7 +6,8 @@ export type ActionType =
   | "copy"
   | "regenerate"
   | "speak"
-  | "options";
+  | "options"
+  | "pin";
 
 export type ActionButtonProps = {
   icon?: ReactNode;
@@ -21,7 +22,7 @@ export type ActionBarProps = {
   messageId: string;
   visible?: boolean;
   actions: ActionType[];
-  onClick: (messageId: string, action: ActionType) => void;
+  onAction: (messageId: string, action: ActionType) => void;
 };
 
 export type ActionButtonMeta = {

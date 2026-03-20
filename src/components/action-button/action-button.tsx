@@ -1,6 +1,6 @@
 import { ActionButtonProps } from "../../types";
 
-const ActionButton = ({
+export const ActionButton = ({
   label,
   icon,
   disabled,
@@ -10,7 +10,8 @@ const ActionButton = ({
 }: ActionButtonProps) => {
   return (
     <button
-      data-pressed={active}
+      className="ca-btn"
+      aria-pressed={active}
       disabled={disabled || loading}
       onClick={onClick}
       aria-label={label}

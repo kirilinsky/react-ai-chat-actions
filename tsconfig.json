@@ -9,8 +9,12 @@
     "noEmit": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "."
   },
-  "include": ["src"],
+  "paths": {
+    "react-ai-chat-actions": ["./src/index.ts"]
+  },
+  "include": ["src", "dev"],
   "exclude": ["node_modules"]
 }

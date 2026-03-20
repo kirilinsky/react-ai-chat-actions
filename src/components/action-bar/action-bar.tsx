@@ -1,47 +1,46 @@
+import {
+  Copy,
+  MoreHorizontal,
+  Pin,
+  RefreshCw,
+  ThumbsDown,
+  ThumbsUp,
+  Volume2,
+} from "lucide-react";
 import { ActionBarProps, ActionButtonMeta, ActionType } from "../../types";
 import ActionButton from "../action-button/action-button";
+import useChatActions from "../../hooks/use-chat-actions";
 
 const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
-  like: {
-    icon: <span>LIKE ICON</span>,
-    label: "LIKE",
-  },
-  dislike: {
-    icon: <span>dislike ICON</span>,
-    label: "dislike",
-  },
-  copy: { icon: <span>copy ICON</span>, label: "copy" },
-  regenerate: {
-    icon: <span>regenerate ICON</span>,
-    label: "regenerate",
-  },
-  speak: { icon: <span>speak ICON</span>, label: "speak" },
-  options: {
-    icon: <span>options ICON</span>,
-    label: "options",
-  },
+  like: { icon: <ThumbsUp size={16} />, label: "Like" },
+  dislike: { icon: <ThumbsDown size={16} />, label: "Dislike" },
+  copy: { icon: <Copy size={16} />, label: "Copy" },
+  regenerate: { icon: <RefreshCw size={16} />, label: "Regenerate" },
+  speak: { icon: <Volume2 size={16} />, label: "Speak" },
+  options: { icon: <MoreHorizontal size={16} />, label: "Options" },
+  pin: { icon: <Pin size={16} />, label: "pin" },
 };
 
-const ActionBar = ({
+export const ActionBar = ({
   messageId,
   actions,
-  onClick,
+  onAction,
   visible,
 }: ActionBarProps) => {
-  const handleOnActionClick = (action: ActionType) => {
-    onClick(messageId, action);
-  };
+  const { isActive, handleAction } = useChatActions({ messageId, onAction });
 
   if (!visible) return null;
   return (
-    <div>
+    <div className="ca-bar">
       {actions.map((action) => {
         let meta = buttonsMeta[action];
+        let active = isActive(action);
         return (
           <ActionButton
             key={action}
             {...meta}
-            onClick={() => handleOnActionClick(action)}
+            active={active}
+            onClick={() => handleAction(action)}
           />
         );
       })}
