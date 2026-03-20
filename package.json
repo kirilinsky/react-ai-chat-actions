@@ -1,30 +1,56 @@
 {
   "name": "react-ai-chat-actions",
-  "version": "1.0.0",
-  "description": "React actions bar for AI chat",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "React actions bar for AI chat messages",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch"
+    "dev": "vite dev",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "npx storybook build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kirilinsky/react-ai-chat-actions.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "license": "MIT",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/kirilinsky/react-ai-chat-actions/issues"
   },
+  "author": "Kirilinsky (https://github.com/kirilinsky)",
   "homepage": "https://github.com/kirilinsky/react-ai-chat-actions#readme",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "var-th": ">=0"
+  },
   "devDependencies": {
+    "@tsdown/css": "^0.21.4",
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tsdown": "^0.21.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "storybook": "^10.3.1",
+    "@storybook/react-vite": "^10.3.1"
+  },
+  "dependencies": {
+    "lucide-react": "^0.577.0"
   }
 }

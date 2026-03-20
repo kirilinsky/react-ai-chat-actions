@@ -1,0 +1,107 @@
+@import "./themes.css";
+
+.ca-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--ca-barBg);
+  box-shadow: var(--ca-barShadow);
+  border-radius: var(--ca-barRadius);
+  border: var(--ca-barBorder);
+}
+
+.ca-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--ca-dividerColor);
+  margin: 0 4px;
+}
+
+.ca-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ca-btnColor);
+  border-radius: var(--ca-btnRadius);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+
+.ca-btn:hover:not(:disabled) {
+  background: var(--ca-btnHoverBg);
+}
+
+.ca-btn[aria-pressed="true"] {
+  background: var(--ca-btnActiveBg);
+  color: var(--ca-btnActiveColor);
+  box-shadow: var(--ca-btnActiveGlow);
+}
+
+.ca-btn[aria-pressed="true"]:hover {
+  background: var(--ca-btnActiveBg);
+  color: var(--ca-btnActiveColor);
+  box-shadow: var(--ca-btnActiveGlow);
+}
+
+.ca-btn:active {
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+
+.ca-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ca-spinner {
+  animation: ca-spin 0.8s linear infinite;
+}
+
+.ca-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.ca-tooltip {
+  position: absolute;
+
+  background: var(--ca-tooltipBg);
+  color: var(--ca-tooltipColor);
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.ca-tooltip--top .ca-tooltip {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ca-tooltip--bottom .ca-tooltip {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ca-tooltip-wrapper:hover .ca-tooltip {
+  opacity: 1;
+}
+@keyframes ca-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

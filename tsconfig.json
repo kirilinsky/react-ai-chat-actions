@@ -3,14 +3,19 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "sourceMap": false,
+    "baseUrl": "."
   },
-  "include": ["src"],
+  "paths": {
+    "react-ai-chat-actions": ["./src/index.ts"]
+  },
+  "include": ["src", "dev"],
   "exclude": ["node_modules"]
 }
