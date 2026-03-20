@@ -11,6 +11,7 @@ createRoot(document.getElementById("root")!).render(
     actions={[
       "like",
       "dislike",
+      "divider",
       "copy",
       "regenerate",
       "speak",

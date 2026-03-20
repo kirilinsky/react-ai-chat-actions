@@ -7,7 +7,8 @@ export type ActionType =
   | "regenerate"
   | "speak"
   | "options"
-  | "pin";
+  | "pin"
+  | "divider";
 
 export type ActionButtonProps = {
   icon?: ReactNode;

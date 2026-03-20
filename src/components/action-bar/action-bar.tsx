@@ -19,6 +19,7 @@ const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
   speak: { icon: <Volume2 size={16} />, label: "Speak" },
   options: { icon: <MoreHorizontal size={16} />, label: "Options" },
   pin: { icon: <Pin size={16} />, label: "pin" },
+  divider: { icon: <div className="ca-divider" />, label: "" },
 };
 
 export const ActionBar = ({
@@ -33,6 +34,9 @@ export const ActionBar = ({
   return (
     <div className="ca-bar">
       {actions.map((action) => {
+        if (action === "divider") {
+          return <div key={action} className="ca-divider" />;
+        }
         let meta = buttonsMeta[action];
         let active = isActive(action);
         return (
