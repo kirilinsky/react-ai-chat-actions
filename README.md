@@ -5,14 +5,13 @@
 [![bundle size](https://img.shields.io/bundlephobia/minzip/react-ai-chat-actions)](https://bundlephobia.com/package/react-ai-chat-actions)
 [![license](https://img.shields.io/npm/l/react-ai-chat-actions)](./LICENSE)
 
-<img src="https://i.ibb.co/HL1Gqjnc/image.png" alt="react-ai-chat-actions" />
+<img src="https://i.ibb.co/fVNC9PSx/aichatlogo.png" alt="react-ai-chat-actions" width="400" />
 
 Action bar for AI chat messages. Like, dislike, copy, regenerate, speak, pin — with themes, tooltips, and loading states out of the box.
 
 **[Live demo →](https://react-ai-chat-actions.vercel.app/)**
 
 ---
-
 ## Install
 
 ```bash
@@ -20,6 +19,8 @@ npm install react-ai-chat-actions
 ```
 
 ---
+
+<img src="https://i.ibb.co/Wvtvyvwc/image.png" alt="react-ai-chat-actions" width="400" />
 
 ## Usage
 

@@ -4,11 +4,11 @@
   "description": "React actions bar for AI chat messages",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
@@ -25,7 +25,19 @@
     "type": "git",
     "url": "git+https://github.com/kirilinsky/react-ai-chat-actions.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "next",
+    "ai",
+    "chat",
+    "actions",
+    "like",
+    "dislike",
+    "copy",
+    "message",
+    "toolbar",
+    "reactions"
+  ],
   "license": "MIT",
   "type": "module",
   "bugs": {
