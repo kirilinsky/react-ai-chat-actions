@@ -33,6 +33,10 @@ const meta: Meta<typeof ActionBar> = {
 export default meta;
 type Story = StoryObj<typeof ActionBar>;
 
+export const Default: Story = {
+  decorators: [(Story) => <Story />],
+};
+
 export const Single: Story = {
   decorators: [(Story) => <Story />],
   args: {
@@ -52,6 +56,13 @@ export const Disabled: Story = {
   decorators: [(Story) => <Story />],
   args: {
     disabled: ["copy"],
+  },
+};
+
+export const Transparent: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    transparent: true,
   },
 };
 

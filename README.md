@@ -45,6 +45,7 @@ import "react-ai-chat-actions/dist/style.css";
 | `messageId`   | `string`                    | —            | Required. Passed back in `onAction`       |
 | `theme`       | `ThemeName`                 | `light-pill` | Theme preset, check type `ThemeName`      |
 | `visible`     | `boolean`                   | `true`       | Show or hide the bar                      |
+| `transparent` | `boolean`                   | `false`      | Transparent background of bar             |
 | `actions`     | `ActionType[]`              | —            | Which buttons to render and in what order |
 | `onAction`    | `(type, messageId) => void` | —            | Callback on any button click              |
 | `loading`     | `ActionType[]`              | `[]`         | Buttons in loading state                  |

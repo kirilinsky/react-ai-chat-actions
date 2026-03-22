@@ -11,6 +11,7 @@ export const ActionBar = ({
   actions,
   onAction,
   visible = true,
+  transparent = false,
   loading,
   disabled,
   tooltip = true,
@@ -48,7 +49,7 @@ export const ActionBar = ({
   return (
     <div
       data-theme={theme}
-      className="ca-bar"
+      className={`ca-bar ${transparent && "transparent"}`}
       ref={barRef}
       onMouseLeave={handleBarLeave}
     >
