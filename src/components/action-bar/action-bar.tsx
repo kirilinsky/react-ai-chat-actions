@@ -4,7 +4,7 @@ import useChatActions from "../../hooks/use-chat-actions";
 import { Tooltip } from "../tooltip/tooltip";
 import buttonsMeta from "../../meta/buttons";
 import { Fragment } from "react/jsx-runtime";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export const ActionBar = ({
   messageId,
@@ -15,34 +15,33 @@ export const ActionBar = ({
   disabled,
   tooltip = true,
   liquidGlass,
-  theme,
+  theme = "light-pill",
 }: ActionBarProps) => {
   const { isActive, handleAction } = useChatActions({ messageId, onAction });
-  const [glassStyle, setGlassStyle] = useState<React.CSSProperties>({
-    opacity: 0,
-  });
 
   const barRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
 
-  const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!liquidGlass) return;
+  const handleButtonEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!liquidGlass || !pillRef.current || !barRef.current) return;
+
     const btn = e.currentTarget;
-    const parent = btn.closest(".ca-bar") as HTMLElement;
-    if (!parent) return;
-
     const btnRect = btn.getBoundingClientRect();
-    const barRect = parent.getBoundingClientRect();
+    const barRect = barRef.current.getBoundingClientRect();
 
-    setGlassStyle({
-      opacity: 1,
-      transform: `translateX(${btnRect.left - barRect.left}px)`,
-      width: btnRect.width,
-      height: btnRect.height,
-    });
+    const pill = pillRef.current;
+    pill.style.translate = `${btnRect.left - barRect.left}px 0`;
+    pill.style.width = `${btnRect.width}px`;
+    pill.style.height = `${btnRect.height}px`;
+    pill.classList.add("ca-glass-pill--visible");
+
+    pill.classList.remove("ca-glass-pill--animate");
+    requestAnimationFrame(() => pill.classList.add("ca-glass-pill--animate"));
   };
 
   const handleBarLeave = () => {
-    setGlassStyle((prev) => ({ ...prev, opacity: 0 }));
+    if (!liquidGlass || !pillRef.current) return;
+    pillRef.current.classList.remove("ca-glass-pill--visible");
   };
 
   if (!visible) return null;
@@ -53,7 +52,27 @@ export const ActionBar = ({
       ref={barRef}
       onMouseLeave={handleBarLeave}
     >
-      {liquidGlass && <div className="ca-glass-cursor" style={glassStyle} />}
+      {liquidGlass && (
+        <>
+          <div ref={pillRef} className="ca-glass-pill" />
+          <svg style={{ position: "absolute", width: 0, height: 0 }}>
+            <filter id="ca-glass-filter" primitiveUnits="objectBoundingBox">
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="0.04"
+                result="blur"
+              />
+              <feDisplacementMap
+                in="blur"
+                in2="SourceGraphic"
+                scale="0.5"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </svg>
+        </>
+      )}
       {actions.map((action) => {
         if (action === "divider") {
           return <div key={action} className="ca-divider" />;
@@ -69,7 +88,7 @@ export const ActionBar = ({
             loading={loading?.includes(action)}
             disabled={disabled?.includes(action)}
             onClick={() => handleAction(action)}
-            onMouseEnter={(e) => handleButtonHover(e)}
+            onMouseEnter={handleButtonEnter}
           />
         );
 

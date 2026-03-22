@@ -142,3 +142,51 @@
   --ca-tooltipBg: #0d2e28;
   --ca-tooltipColor: #4fffcc;
 }
+
+[data-theme="olive-pill"] {
+  --ca-barBg: #f5f5ef;
+  --ca-barShadow: 0 2px 8px #3d3d2a11;
+  --ca-barBorder: none;
+  --ca-barRadius: 999px;
+  --ca-btnColor: #4a4a35;
+  --ca-btnHoverBg: #e8e8dc;
+  --ca-btnActiveBg: #6b7c45;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #6b7c4544;
+  --ca-btnRadius: 999px;
+  --ca-dividerColor: #d4d4c0;
+  --ca-tooltipBg: #3d3d2a;
+  --ca-tooltipColor: #fff;
+}
+
+[data-theme="olive-soft"] {
+  --ca-barBg: #f5f5ef;
+  --ca-barShadow: 0 2px 8px #3d3d2a11;
+  --ca-barBorder: none;
+  --ca-barRadius: 12px;
+  --ca-btnColor: #4a4a35;
+  --ca-btnHoverBg: #e8e8dc;
+  --ca-btnActiveBg: #6b7c45;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #6b7c4544;
+  --ca-btnRadius: 8px;
+  --ca-dividerColor: #d4d4c0;
+  --ca-tooltipBg: #3d3d2a;
+  --ca-tooltipColor: #fff;
+}
+
+[data-theme="olive-sharp"] {
+  --ca-barBg: #f5f5ef;
+  --ca-barShadow: 0 2px 8px #3d3d2a11;
+  --ca-barBorder: none;
+  --ca-barRadius: 0px;
+  --ca-btnColor: #4a4a35;
+  --ca-btnHoverBg: #e8e8dc;
+  --ca-btnActiveBg: #6b7c45;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #6b7c4544;
+  --ca-btnRadius: 0px;
+  --ca-dividerColor: #d4d4c0;
+  --ca-tooltipBg: #3d3d2a;
+  --ca-tooltipColor: #fff;
+}

@@ -23,3 +23,6 @@ export type ThemeName =
   | 'neon-pill'
   | 'neon-soft'
   | 'neon-sharp'
+  | 'olive-pill'
+  | 'olive-soft'
+  | 'olive-sharp'

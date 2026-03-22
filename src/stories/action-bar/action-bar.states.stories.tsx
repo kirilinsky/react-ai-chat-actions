@@ -33,6 +33,14 @@ const meta: Meta<typeof ActionBar> = {
 export default meta;
 type Story = StoryObj<typeof ActionBar>;
 
+export const Single: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "neon-soft",
+    actions: ["heart"],
+  },
+};
+
 export const Loading: Story = {
   decorators: [(Story) => <Story />],
   args: {
@@ -57,6 +65,23 @@ export const NoTooltip: Story = {
 export const LiquidGlass: Story = {
   decorators: [(Story) => <Story />],
   args: {
+    theme: "dark-soft",
+    tooltip: false,
     liquidGlass: true,
+  },
+};
+
+export const ExtraActions: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    actions: [
+      "heart",
+      "divider",
+      "retry",
+      "bookmark",
+      "share",
+      "edit",
+      "translate",
+    ],
   },
 };

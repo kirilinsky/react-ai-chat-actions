@@ -10,7 +10,7 @@ export default defineConfig({
   }),
   external: ["react", "react-dom"],
   minify: true,
-  sourcemap: true,
+  sourcemap: false,
   css: {
     inject: true,
     minify: true,

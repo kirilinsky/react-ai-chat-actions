@@ -13,7 +13,7 @@ export const ActionButton = ({
 }: ActionButtonProps) => {
   return (
     <button
-      className={`ca-btn ${liquidGlass && 'no-hover'}`}
+      className={`ca-btn ${liquidGlass && "no-hover"}`}
       aria-pressed={active}
       disabled={disabled || loading}
       onClick={onClick}

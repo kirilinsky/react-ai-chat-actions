@@ -6,10 +6,16 @@ export type ActionType =
   | "dislike"
   | "copy"
   | "regenerate"
+  | "heart"
   | "speak"
   | "options"
   | "pin"
-  | "divider";
+  | "divider"
+  | "share"
+  | "bookmark"
+  | "edit"
+  | "translate"
+  | "retry";
 export type ActionTypeFiltered = Exclude<ActionType, "divider">;
 
 export type ActionButtonProps = {
@@ -33,7 +39,7 @@ export type ActionBarProps = {
   onAction: (messageId: string, action: ActionType) => void;
   tooltip?: boolean;
   liquidGlass?: boolean;
-  theme?: ThemeName
+  theme?: ThemeName;
 };
 
 export type ActionButtonMeta = {

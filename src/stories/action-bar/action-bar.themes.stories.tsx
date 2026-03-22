@@ -86,3 +86,24 @@ export const NeonSharp: Story = {
     theme: "neon-sharp",
   },
 };
+
+export const OlivePill: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "olive-pill",
+  },
+};
+
+export const OliveSoft: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "olive-soft",
+  },
+};
+
+export const OliveSharp: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "olive-sharp",
+  },
+};

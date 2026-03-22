@@ -26,8 +26,15 @@ const useChatActions = ({
   const isActive = (action: ActionType) => activeActions.includes(action);
 
   const handleAction = (action: ActionType) => {
-    const noStateActions: ActionType[] = ["copy", "regenerate"];
-
+    const noStateActions: ActionType[] = [
+      "copy",
+      "regenerate",
+      "retry",
+      "share",
+      "translate",
+      "edit",
+    ];
+    
     if (noStateActions.includes(action)) {
       onAction(messageId, action);
       return;
