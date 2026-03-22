@@ -14,7 +14,12 @@ export type ThemeToken =
   | '--ca-tooltipColor'
 
 export type ThemeName =
-  | 'square'
-  | 'light'
-  | 'dark'
-  | 'neon'
+  | 'light-pill'
+  | 'light-soft'
+  | 'light-sharp'
+  | 'dark-pill'
+  | 'dark-soft'
+  | 'dark-sharp'
+  | 'neon-pill'
+  | 'neon-soft'
+  | 'neon-sharp'

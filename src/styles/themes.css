@@ -1,65 +1,144 @@
 :root,
-[data-theme="square"] {
---ca-barBg: #fff;
---ca-barShadow: 0 2px 8px #0001;
---ca-barBorder: none;
---ca-barRadius: 0px;
---ca-btnColor: #374151;
---ca-btnHoverBg: #f3f4f6;
---ca-btnActiveBg: #0e7490;
---ca-btnActiveColor: #fff;
---ca-btnActiveGlow: 0 0 4px #0e749044;
---ca-btnRadius: 0px;
---ca-dividerColor: #e5e7eb;
---ca-tooltipBg: #1f2937;
---ca-tooltipColor: #fff;
+[data-theme="light-pill"] {
+  --ca-barBg: #fff;
+  --ca-barShadow: 0 2px 8px #0001;
+  --ca-barBorder: none;
+  --ca-barRadius: 999px;
+  --ca-btnColor: #374151;
+  --ca-btnHoverBg: #f3f4f6;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749044;
+  --ca-btnRadius: 999px;
+  --ca-dividerColor: #e5e7eb;
+  --ca-tooltipBg: #1f2937;
+  --ca-tooltipColor: #fff;
 }
 
-[data-theme="light"] {
---ca-barBg: #fff;
---ca-barShadow: 0 2px 8px #0001;
---ca-barBorder: none;
---ca-barRadius: 999px;
---ca-btnColor: #374151;
---ca-btnHoverBg: #f3f4f6;
---ca-btnActiveBg: #0e7490;
---ca-btnActiveColor: #fff;
---ca-btnActiveGlow: 0 0 4px #0e749044;
---ca-btnRadius: 999px;
---ca-dividerColor: #e5e7eb;
---ca-tooltipBg: #1f2937;
---ca-tooltipColor: #fff;
+[data-theme="light-soft"] {
+  --ca-barBg: #fff;
+  --ca-barShadow: 0 2px 8px #0001;
+  --ca-barBorder: none;
+  --ca-barRadius: 12px;
+  --ca-btnColor: #374151;
+  --ca-btnHoverBg: #f3f4f6;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749044;
+  --ca-btnRadius: 8px;
+  --ca-dividerColor: #e5e7eb;
+  --ca-tooltipBg: #1f2937;
+  --ca-tooltipColor: #fff;
 }
 
-[data-theme="dark"] {
---ca-barBg: #1e1e1e;
---ca-barShadow: 0 2px 8px #0004;
---ca-barBorder: none;
---ca-barRadius: 999px;
---ca-btnColor: #d1d5db;
---ca-btnHoverBg: #ffffff14;
---ca-btnActiveBg: #0e7490;
---ca-btnActiveColor: #fff;
---ca-btnActiveGlow: 0 0 4px #0e749066;
---ca-btnRadius: 999px;
---ca-dividerColor: #ffffff1a;
---ca-tooltipBg: #374151;
---ca-tooltipColor: #f9fafb;
+[data-theme="light-sharp"] {
+  --ca-barBg: #fff;
+  --ca-barShadow: 0 2px 8px #0001;
+  --ca-barBorder: none;
+  --ca-barRadius: 0px;
+  --ca-btnColor: #374151;
+  --ca-btnHoverBg: #f3f4f6;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749044;
+  --ca-btnRadius: 0px;
+  --ca-dividerColor: #e5e7eb;
+  --ca-tooltipBg: #1f2937;
+  --ca-tooltipColor: #fff;
 }
 
-[data-theme="neon"] {
---ca-barBg: #0d0d0d;
---ca-barShadow: 0 2px 12px #0006;
---ca-barBorder: 1px solid #4fffcc66;
---ca-barRadius: 999px;
---ca-btnColor: #aaaaaa;
---ca-btnHoverBg: #ffffff0f;
---ca-btnActiveBg: #4fffcc;
---ca-btnActiveColor: #0d0d0d;
---ca-btnActiveGlow: 0 0 12px #4fffcc, 0 0 24px #4fffcc88;
---ca-btnRadius: 999px;
---ca-dividerColor: #ffffff1a;
---ca-tooltipBg: #0d2e28;
---ca-tooltipColor: #4fffcc;
+[data-theme="dark-pill"] {
+  --ca-barBg: #1e1e1e;
+  --ca-barShadow: 0 2px 8px #0004;
+  --ca-barBorder: none;
+  --ca-barRadius: 999px;
+  --ca-btnColor: #d1d5db;
+  --ca-btnHoverBg: #ffffff14;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749066;
+  --ca-btnRadius: 999px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #374151;
+  --ca-tooltipColor: #f9fafb;
 }
 
+[data-theme="dark-soft"] {
+  --ca-barBg: #1e1e1e;
+  --ca-barShadow: 0 2px 8px #0004;
+  --ca-barBorder: none;
+  --ca-barRadius: 12px;
+  --ca-btnColor: #d1d5db;
+  --ca-btnHoverBg: #ffffff14;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749066;
+  --ca-btnRadius: 8px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #374151;
+  --ca-tooltipColor: #f9fafb;
+}
+
+[data-theme="dark-sharp"] {
+  --ca-barBg: #1e1e1e;
+  --ca-barShadow: 0 2px 8px #0004;
+  --ca-barBorder: none;
+  --ca-barRadius: 0px;
+  --ca-btnColor: #d1d5db;
+  --ca-btnHoverBg: #ffffff14;
+  --ca-btnActiveBg: #0e7490;
+  --ca-btnActiveColor: #fff;
+  --ca-btnActiveGlow: 0 0 4px #0e749066;
+  --ca-btnRadius: 0px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #374151;
+  --ca-tooltipColor: #f9fafb;
+}
+
+[data-theme="neon-pill"] {
+  --ca-barBg: #0d0d0d;
+  --ca-barShadow: 0 2px 12px #0006;
+  --ca-barBorder: 1px solid #4fffcc66;
+  --ca-barRadius: 999px;
+  --ca-btnColor: #aaaaaa;
+  --ca-btnHoverBg: #ffffff0f;
+  --ca-btnActiveBg: #4fffcc;
+  --ca-btnActiveColor: #0d0d0d;
+  --ca-btnActiveGlow: 0 0 12px #4fffcc, 0 0 24px #4fffcc88;
+  --ca-btnRadius: 999px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #0d2e28;
+  --ca-tooltipColor: #4fffcc;
+}
+
+[data-theme="neon-soft"] {
+  --ca-barBg: #0d0d0d;
+  --ca-barShadow: 0 2px 12px #0006;
+  --ca-barBorder: 1px solid #4fffcc66;
+  --ca-barRadius: 12px;
+  --ca-btnColor: #aaaaaa;
+  --ca-btnHoverBg: #ffffff0f;
+  --ca-btnActiveBg: #4fffcc;
+  --ca-btnActiveColor: #0d0d0d;
+  --ca-btnActiveGlow: 0 0 12px #4fffcc, 0 0 24px #4fffcc88;
+  --ca-btnRadius: 8px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #0d2e28;
+  --ca-tooltipColor: #4fffcc;
+}
+
+[data-theme="neon-sharp"] {
+  --ca-barBg: #0d0d0d;
+  --ca-barShadow: 0 2px 12px #0006;
+  --ca-barBorder: 1px solid #4fffcc66;
+  --ca-barRadius: 0px;
+  --ca-btnColor: #aaaaaa;
+  --ca-btnHoverBg: #ffffff0f;
+  --ca-btnActiveBg: #4fffcc;
+  --ca-btnActiveColor: #0d0d0d;
+  --ca-btnActiveGlow: 0 0 12px #4fffcc, 0 0 24px #4fffcc88;
+  --ca-btnRadius: 0px;
+  --ca-dividerColor: #ffffff1a;
+  --ca-tooltipBg: #0d2e28;
+  --ca-tooltipColor: #4fffcc;
+}

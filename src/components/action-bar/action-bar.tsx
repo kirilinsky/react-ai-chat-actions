@@ -1,41 +1,59 @@
-import {
-  Copy,
-  MoreHorizontal,
-  Pin,
-  RefreshCw,
-  ThumbsDown,
-  ThumbsUp,
-  Volume2,
-} from "lucide-react";
-import { ActionBarProps, ActionButtonMeta, ActionType } from "../../types";
+import { ActionBarProps } from "../../types";
 import ActionButton from "../action-button/action-button";
 import useChatActions from "../../hooks/use-chat-actions";
 import { Tooltip } from "../tooltip/tooltip";
-
-const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
-  like: { icon: <ThumbsUp size={16} />, label: "Like" },
-  dislike: { icon: <ThumbsDown size={16} />, label: "Dislike" },
-  copy: { icon: <Copy size={16} />, label: "Copy" },
-  regenerate: { icon: <RefreshCw size={16} />, label: "Regenerate" },
-  speak: { icon: <Volume2 size={16} />, label: "Speak" },
-  options: { icon: <MoreHorizontal size={16} />, label: "Options" },
-  pin: { icon: <Pin size={16} />, label: "pin" },
-  divider: { icon: <div className="ca-divider" />, label: "" },
-};
+import buttonsMeta from "../../meta/buttons";
+import { Fragment } from "react/jsx-runtime";
+import { useRef, useState } from "react";
 
 export const ActionBar = ({
   messageId,
   actions,
   onAction,
-  visible,
+  visible = true,
   loading,
   disabled,
+  tooltip = true,
+  liquidGlass,
+  theme,
 }: ActionBarProps) => {
   const { isActive, handleAction } = useChatActions({ messageId, onAction });
+  const [glassStyle, setGlassStyle] = useState<React.CSSProperties>({
+    opacity: 0,
+  });
+
+  const barRef = useRef<HTMLDivElement>(null);
+
+  const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!liquidGlass) return;
+    const btn = e.currentTarget;
+    const parent = btn.closest(".ca-bar") as HTMLElement;
+    if (!parent) return;
+
+    const btnRect = btn.getBoundingClientRect();
+    const barRect = parent.getBoundingClientRect();
+
+    setGlassStyle({
+      opacity: 1,
+      transform: `translateX(${btnRect.left - barRect.left}px)`,
+      width: btnRect.width,
+      height: btnRect.height,
+    });
+  };
+
+  const handleBarLeave = () => {
+    setGlassStyle((prev) => ({ ...prev, opacity: 0 }));
+  };
 
   if (!visible) return null;
   return (
-    <div className="ca-bar">
+    <div
+      data-theme={theme}
+      className="ca-bar"
+      ref={barRef}
+      onMouseLeave={handleBarLeave}
+    >
+      {liquidGlass && <div className="ca-glass-cursor" style={glassStyle} />}
       {actions.map((action) => {
         if (action === "divider") {
           return <div key={action} className="ca-divider" />;
@@ -43,20 +61,28 @@ export const ActionBar = ({
         let meta = buttonsMeta[action];
         let active = isActive(action);
 
-        return (
-          <Tooltip
+        const button = (
+          <ActionButton
+            {...meta}
+            liquidGlass={liquidGlass}
+            active={active}
+            loading={loading?.includes(action)}
             disabled={disabled?.includes(action)}
-            label={meta.label}
+            onClick={() => handleAction(action)}
+            onMouseEnter={(e) => handleButtonHover(e)}
+          />
+        );
+
+        return tooltip ? (
+          <Tooltip
             key={action}
+            label={meta.label}
+            disabled={disabled?.includes(action)}
           >
-            <ActionButton
-              {...meta}
-              active={active}
-              loading={loading?.includes(action)}
-              disabled={disabled?.includes(action)}
-              onClick={() => handleAction(action)}
-            />
+            {button}
           </Tooltip>
+        ) : (
+          <Fragment key={action}>{button}</Fragment>
         );
       })}
     </div>
