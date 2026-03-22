@@ -33,6 +33,7 @@ export type ActionButtonOptions = { loading?: boolean; disabled?: boolean };
 export type ActionBarProps = {
   messageId: string;
   visible?: boolean;
+  transparent?: boolean;
   actions: ActionType[];
   loading?: ActionTypeFiltered[];
   disabled?: ActionTypeFiltered[];
