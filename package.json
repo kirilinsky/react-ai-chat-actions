@@ -1,6 +1,6 @@
 {
   "name": "react-ai-chat-actions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React actions bar for AI chat messages",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
@@ -36,6 +36,7 @@
     "copy",
     "message",
     "toolbar",
+    "liquid glass",
     "reactions"
   ],
   "license": "MIT",

@@ -1,41 +1,78 @@
-import {
-  Copy,
-  MoreHorizontal,
-  Pin,
-  RefreshCw,
-  ThumbsDown,
-  ThumbsUp,
-  Volume2,
-} from "lucide-react";
-import { ActionBarProps, ActionButtonMeta, ActionType } from "../../types";
+import { ActionBarProps } from "../../types";
 import ActionButton from "../action-button/action-button";
 import useChatActions from "../../hooks/use-chat-actions";
 import { Tooltip } from "../tooltip/tooltip";
-
-const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
-  like: { icon: <ThumbsUp size={16} />, label: "Like" },
-  dislike: { icon: <ThumbsDown size={16} />, label: "Dislike" },
-  copy: { icon: <Copy size={16} />, label: "Copy" },
-  regenerate: { icon: <RefreshCw size={16} />, label: "Regenerate" },
-  speak: { icon: <Volume2 size={16} />, label: "Speak" },
-  options: { icon: <MoreHorizontal size={16} />, label: "Options" },
-  pin: { icon: <Pin size={16} />, label: "pin" },
-  divider: { icon: <div className="ca-divider" />, label: "" },
-};
+import buttonsMeta from "../../meta/buttons";
+import { Fragment } from "react/jsx-runtime";
+import { useRef } from "react";
 
 export const ActionBar = ({
   messageId,
   actions,
   onAction,
-  visible,
+  visible = true,
   loading,
   disabled,
+  tooltip = true,
+  liquidGlass,
+  theme = "light-pill",
 }: ActionBarProps) => {
   const { isActive, handleAction } = useChatActions({ messageId, onAction });
 
+  const barRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+
+  const handleButtonEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!liquidGlass || !pillRef.current || !barRef.current) return;
+
+    const btn = e.currentTarget;
+    const btnRect = btn.getBoundingClientRect();
+    const barRect = barRef.current.getBoundingClientRect();
+
+    const pill = pillRef.current;
+    pill.style.translate = `${btnRect.left - barRect.left}px 0`;
+    pill.style.width = `${btnRect.width}px`;
+    pill.style.height = `${btnRect.height}px`;
+    pill.classList.add("ca-glass-pill--visible");
+
+    pill.classList.remove("ca-glass-pill--animate");
+    requestAnimationFrame(() => pill.classList.add("ca-glass-pill--animate"));
+  };
+
+  const handleBarLeave = () => {
+    if (!liquidGlass || !pillRef.current) return;
+    pillRef.current.classList.remove("ca-glass-pill--visible");
+  };
+
   if (!visible) return null;
   return (
-    <div className="ca-bar">
+    <div
+      data-theme={theme}
+      className="ca-bar"
+      ref={barRef}
+      onMouseLeave={handleBarLeave}
+    >
+      {liquidGlass && (
+        <>
+          <div ref={pillRef} className="ca-glass-pill" />
+          <svg style={{ position: "absolute", width: 0, height: 0 }}>
+            <filter id="ca-glass-filter" primitiveUnits="objectBoundingBox">
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="0.04"
+                result="blur"
+              />
+              <feDisplacementMap
+                in="blur"
+                in2="SourceGraphic"
+                scale="0.5"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </svg>
+        </>
+      )}
       {actions.map((action) => {
         if (action === "divider") {
           return <div key={action} className="ca-divider" />;
@@ -43,20 +80,28 @@ export const ActionBar = ({
         let meta = buttonsMeta[action];
         let active = isActive(action);
 
-        return (
-          <Tooltip
+        const button = (
+          <ActionButton
+            {...meta}
+            liquidGlass={liquidGlass}
+            active={active}
+            loading={loading?.includes(action)}
             disabled={disabled?.includes(action)}
-            label={meta.label}
+            onClick={() => handleAction(action)}
+            onMouseEnter={handleButtonEnter}
+          />
+        );
+
+        return tooltip ? (
+          <Tooltip
             key={action}
+            label={meta.label}
+            disabled={disabled?.includes(action)}
           >
-            <ActionButton
-              {...meta}
-              active={active}
-              loading={loading?.includes(action)}
-              disabled={disabled?.includes(action)}
-              onClick={() => handleAction(action)}
-            />
+            {button}
           </Tooltip>
+        ) : (
+          <Fragment key={action}>{button}</Fragment>
         );
       })}
     </div>
