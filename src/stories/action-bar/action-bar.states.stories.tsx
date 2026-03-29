@@ -4,6 +4,13 @@ import "../../styles/index.css";
 import { themeNames } from "../../themes";
 
 const meta: Meta<typeof ActionBar> = {
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "20px" }}>
+        <Story />
+      </div>
+    ),
+  ],
   title: "ActionBar/States",
   component: ActionBar,
   argTypes: {
