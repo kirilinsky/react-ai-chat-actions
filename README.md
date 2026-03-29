@@ -79,7 +79,7 @@ type ActionType =
 
 ## Themes
 
-Nine built-in themes across three families — pill, soft, and sharp.
+Twelve built-in themes across four families — pill, soft, and sharp.
 
 | Theme         | Shape                       |
 | ------------- | --------------------------- |
@@ -97,9 +97,7 @@ Nine built-in themes across three families — pill, soft, and sharp.
 | `olive-sharp` | Olive, square corners       |
 
 ```tsx
-
-  <ActionBar theme="dark-sharp" ... />
-
+<ActionBar theme="dark-sharp" ... />
 ```
 
 ---
@@ -121,9 +119,44 @@ Works best on dark and neon themes.
 
 ---
 
+## ActionBarWrapper
+
+Wrap any component to attach the action bar to it. Controls position, visibility behavior, and layout mode.
+
+<img src="https://i.ibb.co/sJd01CPQ/image.png" alt="wrapped" width="380" />
+
+```tsx
+import { ActionBarWrapper } from "react-ai-chat-actions";
+
+<ActionBarWrapper
+  messageId="msg-1"
+  actions={["like", "dislike", "copy"]}
+  onAction={(type, id) => console.log(type, id)}
+  verticalPosition="bottom"
+  horizontalPosition="left"
+  showOn="hover"
+  float={false}
+>
+  <div className="message">AI response text goes here</div>
+</ActionBarWrapper>;
+```
+
+### ActionBarWrapper props
+
+| Prop                 | Type                            | Default    | Description                                   |
+| -------------------- | ------------------------------- | ---------- | --------------------------------------------- |
+| `children`           | `ReactNode`                     | —          | The component the bar attaches to             |
+| `verticalPosition`   | `"top" \| "bottom"`             | `"bottom"` | Render bar above or below children            |
+| `horizontalPosition` | `"left" \| "center" \| "right"` | `"left"`   | Horizontal alignment of the bar               |
+| `showOn`             | `"always" \| "hover"`           | `"always"` | Show bar always or only on hover              |
+| `float`              | `boolean`                       | `false`    | Absolute positioning — bar floats over layout |
+
+All `ActionBar` props are also supported.
+
+---
+
 ## Roadmap
 
-- [ ] `ChatMessageWrapper` — wrapper mode with built-in hover visibility
 - [ ] Custom actions support
 - [ ] Animations
 

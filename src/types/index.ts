@@ -47,3 +47,14 @@ export type ActionButtonMeta = {
   icon: ReactNode;
   label: string;
 };
+
+type ActionBarOnlyProps = Omit<ActionBarProps, "visible" | "messageId">
+
+export type ActionBarWrapperProps = ActionBarOnlyProps & {
+  children: ReactNode
+  messageId: string
+  float?: boolean
+  verticalPosition?: "top" | "bottom"
+  horizontalPosition?: "left" | "center" | "right"
+  showOn?: "hover" | "always"
+}

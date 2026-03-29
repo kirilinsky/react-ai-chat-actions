@@ -133,6 +133,89 @@
   animation: ca-glass-scale 300ms ease;
 }
 
+/* wrapper */
+.ca-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ca-wrapper--top .ca-wrapper-hover {
+  margin-bottom: 5px;
+}
+
+.ca-wrapper--bottom .ca-wrapper-hover {
+  margin-top: 5px;
+}
+
+.ca-wrapper--top {
+  flex-direction: column-reverse;
+}
+
+.ca-wrapper--left .ca-bar {
+  align-self: flex-start;
+}
+
+.ca-wrapper--center .ca-bar {
+  align-self: center;
+}
+
+.ca-wrapper--right .ca-bar {
+  align-self: flex-end;
+}
+
+/* float mode */
+
+.ca-wrapper--float .ca-wrapper-hover {
+  margin: 0;
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+}
+.ca-wrapper--float:hover .ca-wrapper-hover {
+  pointer-events: unset;
+}
+
+.ca-wrapper--float.ca-wrapper--top .ca-wrapper-hover {
+  bottom: 100%;
+}
+
+.ca-wrapper--float.ca-wrapper--bottom .ca-wrapper-hover {
+  top: 100%;
+}
+
+.ca-wrapper--float.ca-wrapper--top .ca-bar {
+  margin-bottom: 5px;
+}
+
+.ca-wrapper--float.ca-wrapper--bottom .ca-bar {
+  margin-top: 5px;
+}
+
+.ca-wrapper--float.ca-wrapper--left .ca-bar {
+  left: 0;
+}
+
+.ca-wrapper--float.ca-wrapper--center .ca-bar {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ca-wrapper--float.ca-wrapper--right .ca-bar {
+  right: 0;
+}
+
+.ca-wrapper--hover .ca-bar {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.ca-wrapper--hover:hover .ca-bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @keyframes ca-glass-scale {
   0% {
     scale: 1 1;
