@@ -5,7 +5,7 @@
 [![bundle size](https://img.shields.io/bundlephobia/minzip/react-ai-chat-actions)](https://bundlephobia.com/package/react-ai-chat-actions)
 [![license](https://img.shields.io/npm/l/react-ai-chat-actions)](./LICENSE)
 
-<img src="https://i.ibb.co/fVNC9PSx/aichatlogo.png" alt="react-ai-chat-actions" width="400" />
+<img src="./logo.png" alt="react-ai-chat-actions" width="400" />
 
 React action toolbar for AI chat messages. Add like, dislike, copy, regenerate, speak, pin, and other message reaction buttons to ChatGPT-like interfaces, AI assistants, chatbot UIs, and React/Next.js chat apps.
 

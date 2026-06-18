@@ -16,6 +16,6 @@
       "react-ai-chat-actions": ["./src/index.ts"]
     }
   },
-  "include": ["src", "dev"],
+  "include": ["src", "dev", ".storybook"],
   "exclude": ["node_modules"]
 }
