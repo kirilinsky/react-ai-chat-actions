@@ -6,10 +6,6 @@ const reconcile = (currentAction: ActionType, activeActions: ActionType[]) => {
     return activeActions;
   }
   const filterOption = currentAction === "like" ? "dislike" : "like";
-  console.log(
-    activeActions.filter((a) => a !== filterOption),
-    "activeActions.filter((a) => a !== filterOption);",
-  );
 
   return activeActions.filter((a) => a !== filterOption);
 };
@@ -31,10 +27,11 @@ const useChatActions = ({
       "regenerate",
       "retry",
       "share",
+      "report",
       "translate",
       "edit",
     ];
-    
+
     if (noStateActions.includes(action)) {
       onAction(messageId, action);
       return;
@@ -49,7 +46,6 @@ const useChatActions = ({
     }
   };
 
-  console.log(activeActions, "console.log(activeActions);");
   return { isActive, handleAction };
 };
 

@@ -108,5 +108,3 @@ export const ActionBar = ({
     </div>
   );
 };
-
-export default ActionBar;

@@ -8,7 +8,9 @@ export default defineConfig({
   outExtensions: () => ({
     dts: ".d.ts",
   }),
-  external: ["react", "react-dom"],
+  deps: {
+    neverBundle: ["react", "react-dom"],
+  },
   minify: true,
   sourcemap: false,
   css: {

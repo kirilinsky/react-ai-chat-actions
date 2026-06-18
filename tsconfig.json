@@ -11,10 +11,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "sourceMap": false,
-    "baseUrl": "."
-  },
-  "paths": {
-    "react-ai-chat-actions": ["./src/index.ts"]
+    "paths": {
+      "src/*": ["./src/*"],
+      "react-ai-chat-actions": ["./src/index.ts"]
+    }
   },
   "include": ["src", "dev"],
   "exclude": ["node_modules"]

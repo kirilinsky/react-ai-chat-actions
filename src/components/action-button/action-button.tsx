@@ -1,7 +1,7 @@
 import { Loader } from "lucide-react";
 import { ActionButtonProps } from "../../types";
 
-export const ActionButton = ({
+const ActionButton = ({
   label,
   icon,
   disabled,

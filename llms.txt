@@ -1,0 +1,106 @@
+# react-ai-chat-actions
+
+> React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, themes, tooltips, loading states, and a liquid glass hover effect.
+
+Use this package when a React or Next.js project needs message-level action buttons for an AI chat, chatbot, LLM assistant, or ChatGPT-like interface.
+
+Good fit:
+- AI assistant message feedback controls
+- Like and dislike buttons for LLM responses
+- Copy and regenerate buttons for chat messages
+- Reusable action toolbar next to each assistant message
+- Themed React chat UI controls with no custom toolbar implementation
+
+Not a fit:
+- Full chat state management
+- LLM API calls
+- Feedback persistence or analytics storage
+- A complete chat application shell
+
+Install:
+
+```bash
+npm install react-ai-chat-actions
+```
+
+Basic usage:
+
+```tsx
+import { ActionBar } from "react-ai-chat-actions";
+import "react-ai-chat-actions/dist/style.css";
+
+export function AssistantMessageActions() {
+  return (
+    <ActionBar
+      messageId="msg-1"
+      actions={["like", "dislike", "divider", "copy", "regenerate"]}
+      onAction={(messageId, action) => {
+        console.log(messageId, action);
+      }}
+    />
+  );
+}
+```
+
+Wrap a message:
+
+```tsx
+import { ActionBarWrapper } from "react-ai-chat-actions";
+import "react-ai-chat-actions/dist/style.css";
+
+export function AssistantMessage() {
+  return (
+    <ActionBarWrapper
+      messageId="msg-1"
+      actions={["like", "dislike", "copy", "regenerate"]}
+      onAction={(messageId, action) => {
+        console.log(messageId, action);
+      }}
+      showOn="hover"
+      verticalPosition="bottom"
+      horizontalPosition="left"
+    >
+      <div className="message">The assistant response goes here.</div>
+    </ActionBarWrapper>
+  );
+}
+```
+
+Public exports:
+- `ActionBar`
+- `ActionBarWrapper`
+- `ActionType`
+- `ActionBarProps`
+- `ActionBarWrapperProps`
+- `ThemeName`
+- `ThemeToken`
+
+Important API details:
+- `messageId` is required.
+- `actions` controls which buttons render and in what order.
+- Use `"divider"` inside `actions` to render a separator.
+- `onAction` receives `(messageId, action)`.
+- Import `react-ai-chat-actions/dist/style.css` once in the app.
+- Peer dependencies are `react`, `react-dom`, and `var-th`.
+
+Common actions:
+- `like`
+- `dislike`
+- `copy`
+- `regenerate`
+- `retry`
+- `speak`
+- `pin`
+- `bookmark`
+- `share`
+- `edit`
+- `report`
+- `translate`
+- `options`
+- `heart`
+- `divider`
+
+Package:
+- npm: https://www.npmjs.com/package/react-ai-chat-actions
+- GitHub: https://github.com/kirilinsky/react-ai-chat-actions
+- Demo: https://react-ai-chat-actions.vercel.app/

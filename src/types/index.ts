@@ -14,6 +14,7 @@ export type ActionType =
   | "share"
   | "bookmark"
   | "edit"
+  | "report"
   | "translate"
   | "retry";
 export type ActionTypeFiltered = Exclude<ActionType, "divider">;

@@ -29,11 +29,12 @@ const meta: Meta<typeof ActionBar> = {
       "divider",
       "copy",
       "regenerate",
+      "report",
       "speak",
       "options",
       "pin",
     ],
-    onAction: (type, id) => console.log(type, id),
+    onAction: (id, type) => console.log(id, type),
   },
 };
 
@@ -98,6 +99,7 @@ export const ExtraActions: Story = {
       "retry",
       "bookmark",
       "share",
+      "report",
       "edit",
       "translate",
     ],

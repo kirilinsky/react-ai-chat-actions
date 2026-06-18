@@ -1,5 +1,5 @@
 import { ActionBarWrapperProps } from "src/types";
-import ActionBar from "../action-bar/action-bar";
+import { ActionBar } from "../action-bar/action-bar";
 
 export const ActionBarWrapper = ({
   children,

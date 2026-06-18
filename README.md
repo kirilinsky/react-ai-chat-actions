@@ -7,9 +7,23 @@
 
 <img src="https://i.ibb.co/fVNC9PSx/aichatlogo.png" alt="react-ai-chat-actions" width="400" />
 
-Action bar for AI chat messages. Like, dislike, copy, regenerate, speak, pin — with themes, tooltips, loading states, and liquid glass effect out of the box.
+React action toolbar for AI chat messages. Add like, dislike, copy, regenerate, speak, pin, and other message reaction buttons to ChatGPT-like interfaces, AI assistants, chatbot UIs, and React/Next.js chat apps.
 
 **[Live demo →](https://react-ai-chat-actions.vercel.app/)**
+
+---
+
+## When to use
+
+Use `react-ai-chat-actions` when you are building:
+
+- AI chat message feedback controls
+- ChatGPT-like assistant message actions
+- Like/dislike/copy/regenerate buttons for LLM responses
+- A React or Next.js chatbot UI that needs a polished message toolbar
+- A reusable action bar with themes, tooltips, loading states, and a liquid glass hover effect
+
+The package is a focused UI component for message-level actions. It does not manage chat state, send API requests, or store feedback for you.
 
 ---
 
@@ -32,7 +46,7 @@ import "react-ai-chat-actions/dist/style.css";
 <ActionBar
   messageId="msg-1"
   actions={["like", "dislike", "divider", "copy", "regenerate"]}
-  onAction={(type, messageId) => console.log(type, messageId)}
+  onAction={(messageId, action) => console.log(messageId, action)}
 />;
 ```
 
@@ -47,7 +61,7 @@ import "react-ai-chat-actions/dist/style.css";
 | `visible`     | `boolean`                   | `true`       | Show or hide the bar                      |
 | `transparent` | `boolean`                   | `false`      | Transparent background of bar             |
 | `actions`     | `ActionType[]`              | —            | Which buttons to render and in what order |
-| `onAction`    | `(type, messageId) => void` | —            | Callback on any button click              |
+| `onAction`    | `(messageId, action) => void` | —          | Callback on any button click              |
 | `loading`     | `ActionType[]`              | `[]`         | Buttons in loading state                  |
 | `disabled`    | `ActionType[]`              | `[]`         | Buttons in disabled state                 |
 | `tooltip`     | `boolean`                   | `true`       | Show tooltips on hover                    |
@@ -68,6 +82,7 @@ type ActionType =
   | "bookmark"
   | "share"
   | "edit"
+  | "report"
   | "translate"
   | "options"
   | "divider";
@@ -131,7 +146,7 @@ import { ActionBarWrapper } from "react-ai-chat-actions";
 <ActionBarWrapper
   messageId="msg-1"
   actions={["like", "dislike", "copy"]}
-  onAction={(type, id) => console.log(type, id)}
+  onAction={(id, action) => console.log(id, action)}
   verticalPosition="bottom"
   horizontalPosition="left"
   showOn="hover"
@@ -147,11 +162,32 @@ import { ActionBarWrapper } from "react-ai-chat-actions";
 | -------------------- | ------------------------------- | ---------- | --------------------------------------------- |
 | `children`           | `ReactNode`                     | —          | The component the bar attaches to             |
 | `verticalPosition`   | `"top" \| "bottom"`             | `"bottom"` | Render bar above or below children            |
-| `horizontalPosition` | `"left" \| "center" \| "right"` | `"left"`   | Horizontal alignment of the bar               |
+| `horizontalPosition` | `"left" \| "center" \| "right"` | `"right"`  | Horizontal alignment of the bar               |
 | `showOn`             | `"always" \| "hover"`           | `"always"` | Show bar always or only on hover              |
 | `float`              | `boolean`                       | `false`    | Absolute positioning — bar floats over layout |
 
 All `ActionBar` props are also supported.
+
+---
+
+## AI coding assistant prompt
+
+If you are using Codex, Claude Code, Cursor, Windsurf, or another AI coding assistant, ask for:
+
+```text
+Install react-ai-chat-actions and add message action buttons to my React chat UI.
+Use ActionBar or ActionBarWrapper for like, dislike, copy, and regenerate actions.
+```
+
+The assistant should install the package, import the CSS, render `ActionBar` near each AI message, and handle `onAction(messageId, action)`.
+
+---
+
+## Examples
+
+- [Basic React usage](./examples/basic-react/README.md)
+- [Next.js chat message usage](./examples/next-chat-message/README.md)
+- [AI feedback handling](./examples/ai-chat-feedback/README.md)
 
 ---
 

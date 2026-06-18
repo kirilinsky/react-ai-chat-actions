@@ -47,8 +47,8 @@ const meta: Meta<typeof ActionBarWrapper> = {
     showOn: "always",
     float: false,
     theme: "light-pill",
-    actions: ["like", "dislike", "divider", "copy", "regenerate"],
-    onAction: (type, id) => console.log(type, id),
+    actions: ["like", "dislike", "divider", "copy", "regenerate", "report"],
+    onAction: (id, type) => console.log(id, type),
     children: (
       <Message
         text="Sure thing! Here's a quick summary of the key points from the article you shared: 
@@ -108,7 +108,14 @@ export const DefaultVsFloat: Story = {
             horizontalPosition="left"
             showOn="hover"
             theme="light-pill"
-            actions={["like", "dislike", "divider", "copy", "regenerate"]}
+            actions={[
+              "like",
+              "dislike",
+              "divider",
+              "copy",
+              "regenerate",
+              "report",
+            ]}
             onAction={() => {}}
           >
             <Message text="Same message, bar floats outside layout" />
