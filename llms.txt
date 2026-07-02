@@ -27,7 +27,6 @@ Basic usage:
 
 ```tsx
 import { ActionBar } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 export function AssistantMessageActions() {
   return (
@@ -46,7 +45,6 @@ Wrap a message:
 
 ```tsx
 import { ActionBarWrapper } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 export function AssistantMessage() {
   return (
@@ -80,8 +78,8 @@ Important API details:
 - `actions` controls which buttons render and in what order.
 - Use `"divider"` inside `actions` to render a separator.
 - `onAction` receives `(messageId, action)`.
-- Import `react-ai-chat-actions/dist/style.css` once in the app.
-- Peer dependencies are `react`, `react-dom`, and `var-th`.
+- Styles are bundled and load automatically with the package import — no separate CSS import needed.
+- Peer dependencies are `react` and `react-dom`.
 
 Common actions:
 - `like`

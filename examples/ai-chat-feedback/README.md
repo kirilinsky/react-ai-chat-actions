@@ -5,10 +5,9 @@ Use `onAction` to connect message actions to your chat logic, analytics, or feed
 ```tsx
 import { useState } from "react";
 import { ActionBar, type ActionType } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 export function AssistantFeedback({ messageId }: { messageId: string }) {
-  const [loading, setLoading] = useState<ActionType[]>([]);
+  const [loading, setLoading] = useState<Exclude<ActionType, "divider">[]>([]);
 
   async function handleAction(id: string, action: ActionType) {
     if (action === "copy") {

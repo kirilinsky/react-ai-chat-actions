@@ -41,7 +41,6 @@ npm install react-ai-chat-actions
 
 ```tsx
 import { ActionBar } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 <ActionBar
   messageId="msg-1"
@@ -62,8 +61,8 @@ import "react-ai-chat-actions/dist/style.css";
 | `transparent` | `boolean`                   | `false`      | Transparent background of bar             |
 | `actions`     | `ActionType[]`              | —            | Which buttons to render and in what order |
 | `onAction`    | `(messageId, action) => void` | —          | Callback on any button click              |
-| `loading`     | `ActionType[]`              | `[]`         | Buttons in loading state                  |
-| `disabled`    | `ActionType[]`              | `[]`         | Buttons in disabled state                 |
+| `loading`     | `Exclude<ActionType, "divider">[]` | `[]`  | Buttons in loading state                  |
+| `disabled`    | `Exclude<ActionType, "divider">[]` | `[]`  | Buttons in disabled state                 |
 | `tooltip`     | `boolean`                   | `true`       | Show tooltips on hover                    |
 | `liquidGlass` | `boolean`                   | `false`      | Enable liquid glass hover effect          |
 
@@ -94,7 +93,7 @@ type ActionType =
 
 ## Themes
 
-Twelve built-in themes across four families — pill, soft, and sharp.
+Twelve built-in themes: four color families (light, dark, neon, olive) × three shapes (pill, soft, sharp).
 
 | Theme         | Shape                       |
 | ------------- | --------------------------- |
@@ -179,7 +178,7 @@ Install react-ai-chat-actions and add message action buttons to my React chat UI
 Use ActionBar or ActionBarWrapper for like, dislike, copy, and regenerate actions.
 ```
 
-The assistant should install the package, import the CSS, render `ActionBar` near each AI message, and handle `onAction(messageId, action)`.
+The assistant should install the package, render `ActionBar` near each AI message, and handle `onAction(messageId, action)`. Styles are bundled and load automatically with the import.
 
 ---
 

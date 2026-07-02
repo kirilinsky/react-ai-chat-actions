@@ -4,7 +4,6 @@ Use `ActionBar` when you already control the message layout and only need the ac
 
 ```tsx
 import { ActionBar } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 export function MessageActions() {
   return (

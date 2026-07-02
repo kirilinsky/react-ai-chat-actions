@@ -1,6 +1,6 @@
 {
   "name": "react-ai-chat-actions",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, themes and tooltips",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
@@ -68,8 +68,7 @@
   "homepage": "https://github.com/kirilinsky/react-ai-chat-actions#readme",
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18",
-    "var-th": ">=0"
+    "react-dom": ">=18"
   },
   "devDependencies": {
     "@storybook/react": "^10.4.6",
@@ -84,6 +83,7 @@
     "storybook": "^10.4.6",
     "tsdown": "^0.21.10",
     "typescript": "^5.9.3",
+    "var-th": "^0.1.8",
     "vite": "^8.0.16"
   },
   "dependencies": {

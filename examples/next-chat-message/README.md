@@ -6,7 +6,6 @@ Use `ActionBarWrapper` when you want the toolbar attached to a message bubble.
 "use client";
 
 import { ActionBarWrapper } from "react-ai-chat-actions";
-import "react-ai-chat-actions/dist/style.css";
 
 type ChatMessageProps = {
   id: string;
@@ -33,4 +32,4 @@ export function AssistantMessage({ id, content }: ChatMessageProps) {
 }
 ```
 
-Import the CSS once in a client entry, layout, or component that renders the chat UI.
+Styles are bundled with the package and load automatically with the import.

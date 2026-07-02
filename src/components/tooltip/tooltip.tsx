@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 export const Tooltip = ({
   label,
@@ -9,16 +9,19 @@ export const Tooltip = ({
   children: ReactNode;
   disabled?: boolean;
 }) => {
-  if (disabled) return children;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const [side, setSide] = useState<"top" | "bottom">("top");
+
+  useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
   const handleMouseEnter = () => {
     if (!wrapperRef.current || !tooltipRef.current) return;
 
-    setTimeout(() => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
       if (!wrapperRef.current || !tooltipRef.current) return;
 
       const rect = wrapperRef.current.getBoundingClientRect();
@@ -35,6 +38,8 @@ export const Tooltip = ({
       setSide(side);
     }, 0);
   };
+
+  if (disabled) return children;
 
   return (
     <div

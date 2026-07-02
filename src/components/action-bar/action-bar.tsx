@@ -49,7 +49,7 @@ export const ActionBar = ({
   return (
     <div
       data-theme={theme}
-      className={`ca-bar ${transparent && "transparent"}`}
+      className={`ca-bar${transparent ? " transparent" : ""}`}
       ref={barRef}
       onMouseLeave={handleBarLeave}
     >
@@ -74,9 +74,9 @@ export const ActionBar = ({
           </svg>
         </>
       )}
-      {actions.map((action) => {
+      {actions.map((action, index) => {
         if (action === "divider") {
-          return <div key={action} className="ca-divider" />;
+          return <div key={`${action}-${index}`} className="ca-divider" />;
         }
         let meta = buttonsMeta[action];
         let active = isActive(action);
@@ -95,14 +95,14 @@ export const ActionBar = ({
 
         return tooltip ? (
           <Tooltip
-            key={action}
+            key={`${action}-${index}`}
             label={meta.label}
             disabled={disabled?.includes(action)}
           >
             {button}
           </Tooltip>
         ) : (
-          <Fragment key={action}>{button}</Fragment>
+          <Fragment key={`${action}-${index}`}>{button}</Fragment>
         );
       })}
     </div>
