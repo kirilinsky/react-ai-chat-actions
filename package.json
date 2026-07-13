@@ -1,6 +1,6 @@
 {
   "name": "react-ai-chat-actions",
-  "version": "0.3.0",
+  "version": "0.2.3",
   "description": "React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, themes and tooltips",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
@@ -71,6 +71,7 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@storybook/react": "^10.4.6",
     "@storybook/react-vite": "^10.4.6",
     "@tsdown/css": "^0.21.10",
