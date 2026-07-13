@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { ActionType } from "src/types";
+import { useRef, useState } from "react";
+import { ActionId } from "src/types";
 
-const reconcile = (currentAction: ActionType, activeActions: ActionType[]) => {
+const reconcile = (currentAction: ActionId, activeActions: ActionId[]) => {
   if (currentAction !== "like" && currentAction !== "dislike") {
     return activeActions;
   }
@@ -13,40 +13,51 @@ const reconcile = (currentAction: ActionType, activeActions: ActionType[]) => {
 const useChatActions = ({
   messageId,
   onAction,
+  toggleIds,
+  activeActions,
+  defaultActiveActions,
+  onActiveActionsChange,
 }: {
   messageId: string;
-  onAction: (messageId: string, action: ActionType) => void;
+  onAction: (messageId: string, action: ActionId) => void;
+  toggleIds: Set<string>;
+  activeActions?: ActionId[];
+  defaultActiveActions?: ActionId[];
+  onActiveActionsChange?: (messageId: string, active: ActionId[]) => void;
 }) => {
-  const [activeActions, setActiveActions] = useState<ActionType[]>([]);
+  const [internalActive, setInternalActive] = useState<ActionId[]>(
+    defaultActiveActions ?? []
+  );
+  const isControlled = activeActions !== undefined;
+  const active = isControlled ? activeActions : internalActive;
+  // ref keeps async callers (e.g. speech onend) off stale closures
+  const activeRef = useRef(active);
+  activeRef.current = active;
 
-  const isActive = (action: ActionType) => activeActions.includes(action);
+  const isActive = (action: ActionId) => active.includes(action);
 
-  const handleAction = (action: ActionType) => {
-    const noStateActions: ActionType[] = [
-      "copy",
-      "regenerate",
-      "retry",
-      "share",
-      "report",
-      "translate",
-      "edit",
-    ];
-
-    if (noStateActions.includes(action)) {
-      onAction(messageId, action);
-      return;
-    }
-
-    if (isActive(action)) {
-      setActiveActions((prev) => prev.filter((a) => a !== action));
-    } else {
-      let reconciledActions = reconcile(action, activeActions);
-      onAction(messageId, action);
-      setActiveActions([...reconciledActions, action]);
-    }
+  const applyActive = (next: ActionId[]) => {
+    if (!isControlled) setInternalActive(next);
+    onActiveActionsChange?.(messageId, next);
   };
 
-  return { isActive, handleAction };
+  const setActionActive = (action: ActionId, value: boolean) => {
+    const current = activeRef.current;
+    if (current.includes(action) === value) return;
+    applyActive(
+      value
+        ? [...reconcile(action, current), action]
+        : current.filter((a) => a !== action)
+    );
+  };
+
+  const handleAction = (action: ActionId) => {
+    onAction(messageId, action);
+    if (!toggleIds.has(action)) return;
+    setActionActive(action, !activeRef.current.includes(action));
+  };
+
+  return { isActive, handleAction, setActionActive };
 };
 
 export default useChatActions;

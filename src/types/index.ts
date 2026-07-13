@@ -19,6 +19,17 @@ export type ActionType =
   | "retry";
 export type ActionTypeFiltered = Exclude<ActionType, "divider">;
 
+export type ActionId = ActionTypeFiltered | (string & {});
+
+export type CustomAction = {
+  id: string;
+  icon: ReactNode;
+  label: string;
+  toggle?: boolean;
+};
+
+export type ActionItem = ActionType | CustomAction;
+
 export type ActionButtonProps = {
   icon?: ReactNode;
   label?: string;
@@ -27,6 +38,8 @@ export type ActionButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   liquidGlass?: boolean;
+  tabIndex?: number;
+  onFocus?: () => void;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -35,10 +48,16 @@ export type ActionBarProps = {
   messageId: string;
   visible?: boolean;
   transparent?: boolean;
-  actions: ActionType[];
-  loading?: ActionTypeFiltered[];
-  disabled?: ActionTypeFiltered[];
-  onAction: (messageId: string, action: ActionType) => void;
+  actions: ActionItem[];
+  loading?: ActionId[];
+  disabled?: ActionId[];
+  onAction: (messageId: string, action: ActionId) => void;
+  activeActions?: ActionId[];
+  defaultActiveActions?: ActionId[];
+  onActiveActionsChange?: (messageId: string, active: ActionId[]) => void;
+  copyText?: string | (() => string);
+  speakText?: string | (() => string);
+  ariaLabel?: string;
   tooltip?: boolean;
   liquidGlass?: boolean;
   theme?: ThemeName;
