@@ -53,18 +53,24 @@ import { ActionBar } from "react-ai-chat-actions";
 
 ## Props
 
-| Prop          | Type                        | Default      | Description                               |
-| ------------- | --------------------------- | ------------ | ----------------------------------------- |
-| `messageId`   | `string`                    | —            | Required. Passed back in `onAction`       |
-| `theme`       | `ThemeName`                 | `light-pill` | Theme preset, check type `ThemeName`      |
-| `visible`     | `boolean`                   | `true`       | Show or hide the bar                      |
-| `transparent` | `boolean`                   | `false`      | Transparent background of bar             |
-| `actions`     | `ActionType[]`              | —            | Which buttons to render and in what order |
-| `onAction`    | `(messageId, action) => void` | —          | Callback on any button click              |
-| `loading`     | `Exclude<ActionType, "divider">[]` | `[]`  | Buttons in loading state                  |
-| `disabled`    | `Exclude<ActionType, "divider">[]` | `[]`  | Buttons in disabled state                 |
-| `tooltip`     | `boolean`                   | `true`       | Show tooltips on hover                    |
-| `liquidGlass` | `boolean`                   | `false`      | Enable liquid glass hover effect          |
+| Prop                   | Type                          | Default      | Description                                          |
+| ---------------------- | ----------------------------- | ------------ | ---------------------------------------------------- |
+| `messageId`            | `string`                      | —            | Required. Passed back in `onAction`                  |
+| `theme`                | `ThemeName`                   | `light-pill` | Theme preset, check type `ThemeName`                 |
+| `visible`              | `boolean`                     | `true`       | Show or hide the bar                                 |
+| `transparent`          | `boolean`                     | `false`      | Transparent background of bar                        |
+| `actions`              | `ActionItem[]`                | —            | Built-in action names and/or custom action objects   |
+| `onAction`             | `(messageId, action) => void` | —            | Callback on any button click                         |
+| `activeActions`        | `ActionId[]`                  | —            | Controlled active state (like, pin, …)               |
+| `defaultActiveActions` | `ActionId[]`                  | `[]`         | Initial active state (uncontrolled)                  |
+| `onActiveActionsChange`| `(messageId, active) => void` | —            | Fires with the next active list on every toggle      |
+| `copyText`             | `string \| () => string`      | —            | Enables built-in clipboard copy + "Copied" feedback  |
+| `speakText`            | `string \| () => string`      | —            | Enables built-in text-to-speech via Web Speech API   |
+| `loading`              | `ActionId[]`                  | `[]`         | Buttons in loading state                             |
+| `disabled`             | `ActionId[]`                  | `[]`         | Buttons in disabled state                            |
+| `ariaLabel`            | `string`                      | `Message actions` | Accessible name of the toolbar                  |
+| `tooltip`              | `boolean`                     | `true`       | Show tooltips on hover                               |
+| `liquidGlass`          | `boolean`                     | `false`      | Enable liquid glass hover effect                     |
 
 ### ActionType
 
@@ -88,6 +94,98 @@ type ActionType =
 ```
 
 <img src="https://i.ibb.co/bjx1g4Kz/image.png" alt="extra-actions" width="400" />
+
+---
+
+## Controlled active state
+
+Toggle actions (`like`, `dislike`, `heart`, `speak`, `options`, `pin`, `bookmark`, and custom actions with `toggle: true`) track an active state. By default it lives inside the component. To persist it (e.g. feedback stored on your server), control it:
+
+```tsx
+const [active, setActive] = useState<ActionId[]>(["like"]); // from your API
+
+<ActionBar
+  messageId="msg-1"
+  actions={["like", "dislike", "divider", "pin"]}
+  activeActions={active}
+  onActiveActionsChange={(messageId, next) => {
+    setActive(next);
+    saveFeedback(messageId, next);
+  }}
+  onAction={(messageId, action) => console.log(messageId, action)}
+/>;
+```
+
+For uncontrolled usage with an initial value, use `defaultActiveActions` instead:
+
+```tsx
+<ActionBar defaultActiveActions={["like"]} ... />
+```
+
+`like` and `dislike` stay mutually exclusive in both modes. `onAction` fires on every click, including toggling off.
+
+---
+
+## Custom actions
+
+Mix custom actions with built-in ones directly in the `actions` array:
+
+```tsx
+import { Sparkles } from "lucide-react";
+
+<ActionBar
+  messageId="msg-1"
+  actions={[
+    "like",
+    "dislike",
+    "divider",
+    { id: "explain", icon: <Sparkles size={16} />, label: "Explain" },
+    { id: "raw", icon: <Braces size={16} />, label: "Show raw", toggle: true },
+  ]}
+  onAction={(messageId, action) => {
+    if (action === "explain") explainMessage(messageId);
+  }}
+/>;
+```
+
+| Field    | Type        | Default | Description                                         |
+| -------- | ----------- | ------- | --------------------------------------------------- |
+| `id`     | `string`    | —       | Passed to `onAction`; also used in `loading`/`disabled`/`activeActions` |
+| `icon`   | `ReactNode` | —       | Any icon element                                    |
+| `label`  | `string`    | —       | Tooltip text and `aria-label`                       |
+| `toggle` | `boolean`   | `false` | Track active state like `like`/`pin`                |
+
+---
+
+## Built-in handlers
+
+The bar stays headless by default — `onAction` is yours. Two optional built-ins:
+
+**Copy.** Pass `copyText` and the `copy` button writes to the clipboard and shows a "Copied" check for ~1.6s. `onAction` still fires.
+
+```tsx
+<ActionBar actions={["copy"]} copyText={message.content} ... />
+// or lazy: copyText={() => serializeMessage(message)}
+```
+
+**Speak.** Pass `speakText` and the `speak` button reads the text aloud via the Web Speech API. The button stays active while speaking; clicking again stops it. Silently does nothing in browsers without `speechSynthesis`.
+
+```tsx
+<ActionBar actions={["speak"]} speakText={message.content} ... />
+```
+
+---
+
+## Accessibility
+
+The bar follows the [WAI-ARIA toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/):
+
+- `role="toolbar"` with an accessible name (`ariaLabel` prop, default `"Message actions"`)
+- One tab stop for the whole bar; `←` `→` `↑` `↓` move between buttons, `Home`/`End` jump to first/last
+- Visible `:focus-visible` outline on keyboard focus
+- Tooltips show on keyboard focus, not only hover
+- Toggle buttons expose `aria-pressed`, loading buttons `aria-busy`, dividers `role="separator"`
+- With `ActionBarWrapper showOn="hover"`, the bar also appears on keyboard focus
 
 ---
 
@@ -187,13 +285,17 @@ The assistant should install the package, render `ActionBar` near each AI messag
 - [Basic React usage](./examples/basic-react/README.md)
 - [Next.js chat message usage](./examples/next-chat-message/README.md)
 - [AI feedback handling](./examples/ai-chat-feedback/README.md)
+- [Custom actions](./examples/custom-actions/README.md)
 
 ---
 
 ## Roadmap
 
-- [ ] Custom actions support
+ - [x] Accessibility: toolbar role, keyboard nav, focus-visible, tooltip a11y
+- [ ] Label overrides / i18n
+- [ ] Custom icons for built-in actions
 - [ ] Animations
+- [ ] Overflow menu for narrow containers
 
 ---
 

@@ -17,7 +17,7 @@ export const Tooltip = ({
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
-  const handleMouseEnter = () => {
+  const handleShow = () => {
     if (!wrapperRef.current || !tooltipRef.current) return;
 
     clearTimeout(timeoutRef.current);
@@ -45,10 +45,17 @@ export const Tooltip = ({
     <div
       className={`ca-tooltip-wrapper ca-tooltip--${side}`}
       ref={wrapperRef}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleShow}
+      onFocus={handleShow}
     >
       {children}
-      <span ref={tooltipRef} className="ca-tooltip">
+      {/* text duplicates the button's aria-label, so hide from AT */}
+      <span
+        ref={tooltipRef}
+        className="ca-tooltip"
+        role="tooltip"
+        aria-hidden="true"
+      >
         {label}
       </span>
     </div>

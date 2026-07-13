@@ -8,6 +8,8 @@ const ActionButton = ({
   loading,
   onClick,
   active,
+  tabIndex,
+  onFocus,
   onMouseEnter,
   liquidGlass,
 }: ActionButtonProps) => {
@@ -16,12 +18,19 @@ const ActionButton = ({
       type="button"
       className={`ca-btn${liquidGlass ? " no-hover" : ""}`}
       aria-pressed={active}
+      aria-busy={loading || undefined}
       disabled={disabled || loading}
+      tabIndex={tabIndex}
       onClick={onClick}
       aria-label={label}
+      onFocus={onFocus}
       onMouseEnter={onMouseEnter}
     >
-      {loading ? <Loader size={16} className="ca-spinner" /> : icon}
+      {loading ? (
+        <Loader size={16} className="ca-spinner" aria-hidden="true" />
+      ) : (
+        icon
+      )}
     </button>
   );
 };

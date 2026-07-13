@@ -16,6 +16,16 @@ import {
 } from "lucide-react";
 import { ActionButtonMeta, ActionType } from "src/types";
 
+export const toggleActions: ActionType[] = [
+  "like",
+  "dislike",
+  "heart",
+  "speak",
+  "options",
+  "pin",
+  "bookmark",
+];
+
 const buttonsMeta: Record<ActionType, ActionButtonMeta> = {
   like: { icon: <ThumbsUp size={16} />, label: "Like" },
   dislike: { icon: <ThumbsDown size={16} />, label: "Dislike" },

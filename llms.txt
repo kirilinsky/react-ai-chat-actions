@@ -1,6 +1,6 @@
 # react-ai-chat-actions
 
-> React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, themes, tooltips, loading states, and a liquid glass hover effect.
+> React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, custom actions, controlled state, built-in copy/speak handlers, themes, tooltips, loading states, and a liquid glass hover effect.
 
 Use this package when a React or Next.js project needs message-level action buttons for an AI chat, chatbot, LLM assistant, or ChatGPT-like interface.
 
@@ -64,10 +64,48 @@ export function AssistantMessage() {
 }
 ```
 
+Custom actions (mix with built-ins in the same array):
+
+```tsx
+<ActionBar
+  messageId="msg-1"
+  actions={[
+    "like",
+    "divider",
+    { id: "explain", icon: <Sparkles size={16} />, label: "Explain" },
+    { id: "raw", icon: <Braces size={16} />, label: "Show raw", toggle: true },
+  ]}
+  onAction={(messageId, action) => {
+    if (action === "explain") explainMessage(messageId);
+  }}
+/>
+```
+
+Controlled active state (persist like/pin from your server):
+
+```tsx
+<ActionBar
+  messageId="msg-1"
+  actions={["like", "dislike", "pin"]}
+  activeActions={active}
+  onActiveActionsChange={(messageId, next) => setActive(next)}
+  onAction={(messageId, action) => console.log(messageId, action)}
+/>
+```
+
+Uncontrolled with initial state: `defaultActiveActions={["like"]}`.
+
+Built-in handlers:
+- `copyText` (string or `() => string`) — `copy` button writes to clipboard and shows "Copied" feedback.
+- `speakText` (string or `() => string`) — `speak` button reads text aloud via the Web Speech API; active while speaking, click again to stop.
+
 Public exports:
 - `ActionBar`
 - `ActionBarWrapper`
 - `ActionType`
+- `ActionId`
+- `ActionItem`
+- `CustomAction`
 - `ActionBarProps`
 - `ActionBarWrapperProps`
 - `ThemeName`
@@ -75,11 +113,18 @@ Public exports:
 
 Important API details:
 - `messageId` is required.
-- `actions` controls which buttons render and in what order.
+- `actions` controls which buttons render and in what order; entries are built-in names or `CustomAction` objects (`{ id, icon, label, toggle? }`).
 - Use `"divider"` inside `actions` to render a separator.
-- `onAction` receives `(messageId, action)`.
+- `onAction` receives `(messageId, action)` and fires on every click, including toggling off.
+- Toggle actions: `like`, `dislike`, `heart`, `speak`, `options`, `pin`, `bookmark`, plus custom actions with `toggle: true`. `like`/`dislike` are mutually exclusive.
+- Active state: internal by default, `defaultActiveActions` seeds it, `activeActions` + `onActiveActionsChange` makes it controlled.
 - Styles are bundled and load automatically with the package import — no separate CSS import needed.
 - Peer dependencies are `react` and `react-dom`.
+
+Accessibility:
+- WAI-ARIA toolbar pattern: `role="toolbar"`, roving tabindex (one tab stop, arrow keys move between buttons, Home/End jump).
+- `ariaLabel` prop sets the toolbar's accessible name (default "Message actions").
+- `aria-pressed` on toggle buttons, `aria-busy` on loading buttons, `role="separator"` on dividers, visible `:focus-visible` outline, tooltips shown on keyboard focus.
 
 Common actions:
 - `like`
