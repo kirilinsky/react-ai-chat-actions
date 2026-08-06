@@ -57,6 +57,7 @@ export type ActionBarProps = {
   onActiveActionsChange?: (messageId: string, active: ActionId[]) => void;
   copyText?: string | (() => string);
   speakText?: string | (() => string);
+  icons?: Partial<Record<ActionTypeFiltered, ReactNode>>;
   ariaLabel?: string;
   tooltip?: boolean;
   liquidGlass?: boolean;
