@@ -118,6 +118,23 @@ describe("ActionBar", () => {
     expect(raw.getAttribute("aria-pressed")).toBe("true");
   });
 
+  it("renders custom icons for built-in actions in place of the default", () => {
+    render(
+      <ActionBar
+        messageId="m1"
+        actions={["like", "dislike"]}
+        icons={{ like: <span data-testid="custom-like">L</span> }}
+        onAction={noop}
+      />
+    );
+
+    const like = screen.getByRole("button", { name: "Like" });
+    expect(like.querySelector('[data-testid="custom-like"]')).toBeTruthy();
+
+    const dislike = screen.getByRole("button", { name: "Dislike" });
+    expect(dislike.querySelector('[data-testid="custom-like"]')).toBeFalsy();
+  });
+
   it("copies via built-in handler when copyText is set", async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.assign(navigator, { clipboard: { writeText } });

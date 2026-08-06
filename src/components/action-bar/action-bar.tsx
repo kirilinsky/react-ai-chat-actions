@@ -23,6 +23,7 @@ export const ActionBar = ({
   onActiveActionsChange,
   copyText,
   speakText,
+  icons,
   ariaLabel = "Message actions",
   tooltip = true,
   liquidGlass,
@@ -227,7 +228,10 @@ export const ActionBar = ({
             ? { icon: item.icon, label: item.label }
             : buttonsMeta[item];
           const showCopied = copied && id === "copy";
-          const icon = showCopied ? <Check size={16} /> : meta.icon;
+          const customIcon = !isCustom ? icons?.[item] : undefined;
+          const icon = showCopied
+            ? <Check size={16} />
+            : (customIcon ?? meta.icon);
           const label = showCopied ? "Copied" : meta.label;
           const active = isActive(id);
 

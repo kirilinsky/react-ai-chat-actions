@@ -66,6 +66,7 @@ import { ActionBar } from "react-ai-chat-actions";
 | `onActiveActionsChange`| `(messageId, active) => void` | —            | Fires with the next active list on every toggle      |
 | `copyText`             | `string \| () => string`      | —            | Enables built-in clipboard copy + "Copied" feedback  |
 | `speakText`            | `string \| () => string`      | —            | Enables built-in text-to-speech via Web Speech API   |
+| `icons`                | `Partial<Record<ActionType, ReactNode>>` | — | Override icons for built-in actions           |
 | `loading`              | `ActionId[]`                  | `[]`         | Buttons in loading state                             |
 | `disabled`             | `ActionId[]`                  | `[]`         | Buttons in disabled state                            |
 | `ariaLabel`            | `string`                      | `Message actions` | Accessible name of the toolbar                  |
@@ -154,6 +155,25 @@ import { Sparkles } from "lucide-react";
 | `icon`   | `ReactNode` | —       | Any icon element                                    |
 | `label`  | `string`    | —       | Tooltip text and `aria-label`                       |
 | `toggle` | `boolean`   | `false` | Track active state like `like`/`pin`                |
+
+---
+
+## Custom icons
+
+Override the icon of any built-in action without touching a custom action:
+
+```tsx
+import { Smile, Frown } from "lucide-react";
+
+<ActionBar
+  messageId="msg-1"
+  actions={["like", "dislike", "divider", "copy"]}
+  icons={{ like: <Smile size={16} />, dislike: <Frown size={16} /> }}
+  onAction={(messageId, action) => console.log(messageId, action)}
+/>;
+```
+
+`icons` only replaces the icon — the label, aria-label, and tooltip text stay the built-in default. Actions not listed in `icons` keep their default icon.
 
 ---
 
@@ -291,10 +311,8 @@ The assistant should install the package, render `ActionBar` near each AI messag
 
 ## Roadmap
 
- - [x] Accessibility: toolbar role, keyboard nav, focus-visible, tooltip a11y
-- [ ] Label overrides / i18n
-- [ ] Custom icons for built-in actions
-- [ ] Animations
+ - [ ] Label overrides / i18n
+ - [ ] Animations
 - [ ] Overflow menu for narrow containers
 
 ---

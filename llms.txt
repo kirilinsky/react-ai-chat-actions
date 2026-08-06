@@ -1,6 +1,6 @@
 # react-ai-chat-actions
 
-> React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, custom actions, controlled state, built-in copy/speak handlers, themes, tooltips, loading states, and a liquid glass hover effect.
+> React action toolbar for AI chat messages with like, dislike, copy, regenerate, speak, pin, custom actions, custom icons, controlled state, built-in copy/speak handlers, themes, tooltips, loading states, and a liquid glass hover effect.
 
 Use this package when a React or Next.js project needs message-level action buttons for an AI chat, chatbot, LLM assistant, or ChatGPT-like interface.
 
@@ -99,6 +99,17 @@ Built-in handlers:
 - `copyText` (string or `() => string`) — `copy` button writes to clipboard and shows "Copied" feedback.
 - `speakText` (string or `() => string`) — `speak` button reads text aloud via the Web Speech API; active while speaking, click again to stop.
 
+Custom icons (override a built-in action's icon, keep its label/aria-label):
+
+```tsx
+<ActionBar
+  messageId="msg-1"
+  actions={["like", "dislike"]}
+  icons={{ like: <Smile size={16} />, dislike: <Frown size={16} /> }}
+  onAction={(messageId, action) => console.log(messageId, action)}
+/>
+```
+
 Public exports:
 - `ActionBar`
 - `ActionBarWrapper`
@@ -118,6 +129,7 @@ Important API details:
 - `onAction` receives `(messageId, action)` and fires on every click, including toggling off.
 - Toggle actions: `like`, `dislike`, `heart`, `speak`, `options`, `pin`, `bookmark`, plus custom actions with `toggle: true`. `like`/`dislike` are mutually exclusive.
 - Active state: internal by default, `defaultActiveActions` seeds it, `activeActions` + `onActiveActionsChange` makes it controlled.
+- `icons` prop (`Partial<Record<ActionType, ReactNode>>`) swaps the icon of a built-in action only; not available for custom actions (pass a different `icon` there instead).
 - Styles are bundled and load automatically with the package import — no separate CSS import needed.
 - Peer dependencies are `react` and `react-dom`.
 

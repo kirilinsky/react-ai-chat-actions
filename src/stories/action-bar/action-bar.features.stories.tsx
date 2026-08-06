@@ -4,7 +4,7 @@ import { ActionBar } from "../../components/action-bar/action-bar";
 import "../../styles/index.css";
 import { themeNames } from "../../themes";
 import { ActionId } from "../../types";
-import { Sparkles, Braces } from "lucide-react";
+import { Sparkles, Braces, Smile, Frown } from "lucide-react";
 
 const meta: Meta<typeof ActionBar> = {
   decorators: [
@@ -73,6 +73,16 @@ export const Controlled: Story = {
   },
   args: {
     actions: ["like", "dislike", "divider", "heart", "bookmark"],
+  },
+};
+
+export const CustomIcons: Story = {
+  args: {
+    actions: ["like", "dislike", "divider", "copy"],
+    icons: {
+      like: <Smile size={16} />,
+      dislike: <Frown size={16} />,
+    },
   },
 };
 
