@@ -103,7 +103,7 @@
 }
 
 .ca-tooltip-wrapper:hover .ca-tooltip,
-.ca-tooltip-wrapper:focus-within .ca-tooltip {
+.ca-tooltip-wrapper:has(:focus-visible) .ca-tooltip {
   opacity: 0.9;
 }
 
@@ -218,7 +218,7 @@
 }
 
 .ca-wrapper--hover:hover .ca-bar,
-.ca-wrapper--hover:focus-within .ca-bar {
+.ca-wrapper--hover:has(:focus-visible) .ca-bar {
   opacity: 1;
   pointer-events: auto;
 }
