@@ -53,25 +53,27 @@ import { ActionBar } from "react-ai-chat-actions";
 
 ## Props
 
-| Prop                   | Type                          | Default      | Description                                          |
-| ---------------------- | ----------------------------- | ------------ | ---------------------------------------------------- |
-| `messageId`            | `string`                      | —            | Required. Passed back in `onAction`                  |
-| `theme`                | `ThemeName`                   | `light-pill` | Theme preset, check type `ThemeName`                 |
-| `visible`              | `boolean`                     | `true`       | Show or hide the bar                                 |
-| `transparent`          | `boolean`                     | `false`      | Transparent background of bar                        |
-| `actions`              | `ActionItem[]`                | —            | Built-in action names and/or custom action objects   |
-| `onAction`             | `(messageId, action) => void` | —            | Callback on any button click                         |
-| `activeActions`        | `ActionId[]`                  | —            | Controlled active state (like, pin, …)               |
-| `defaultActiveActions` | `ActionId[]`                  | `[]`         | Initial active state (uncontrolled)                  |
-| `onActiveActionsChange`| `(messageId, active) => void` | —            | Fires with the next active list on every toggle      |
-| `copyText`             | `string \| () => string`      | —            | Enables built-in clipboard copy + "Copied" feedback  |
-| `speakText`            | `string \| () => string`      | —            | Enables built-in text-to-speech via Web Speech API   |
-| `icons`                | `Partial<Record<ActionType, ReactNode>>` | — | Override icons for built-in actions           |
-| `loading`              | `ActionId[]`                  | `[]`         | Buttons in loading state                             |
-| `disabled`             | `ActionId[]`                  | `[]`         | Buttons in disabled state                            |
-| `ariaLabel`            | `string`                      | `Message actions` | Accessible name of the toolbar                  |
-| `tooltip`              | `boolean`                     | `true`       | Show tooltips on hover                               |
-| `liquidGlass`          | `boolean`                     | `false`      | Enable liquid glass hover effect                     |
+| Prop                    | Type                 | Default              | Description                                  |
+| ----------------------- | -------------------- | -------------------- | --------------------------------------------- |
+| `messageId`             | `string`             | —                    | Required. Passed back in `onAction`          |
+| `theme`                 | `ThemeName`          | `light-pill`         | Theme preset                                 |
+| `visible`               | `boolean`            | `true`               | Show or hide the bar                         |
+| `transparent`           | `boolean`            | `false`              | Transparent background of bar                |
+| `actions`               | `ActionItem[]`       | —                    | Built-in names and/or custom action objects  |
+| `onAction`              | `Function`           | —                    | `(id, action) => void`, fires on every click |
+| `activeActions`         | `ActionId[]`         | —                    | Controlled active state (like, pin, …)       |
+| `defaultActiveActions`  | `ActionId[]`         | `[]`                 | Initial active state (uncontrolled)          |
+| `onActiveActionsChange` | `Function`           | —                    | `(id, next) => void` on every toggle         |
+| `copyText`              | `string \| Function` | —                    | Enables built-in clipboard copy              |
+| `speakText`             | `string \| Function` | —                    | Enables built-in text-to-speech              |
+| `icons`                 | `object`             | —                    | Override icons for built-in actions          |
+| `loading`               | `ActionId[]`         | `[]`                 | Buttons in loading state                     |
+| `disabled`              | `ActionId[]`         | `[]`                 | Buttons in disabled state                    |
+| `ariaLabel`             | `string`             | `"Message actions"`  | Accessible name of the toolbar               |
+| `tooltip`               | `boolean`            | `true`               | Show tooltips on hover                       |
+| `liquidGlass`           | `boolean`            | `false`              | Enable liquid glass hover effect             |
+
+Exact types: `onAction: (messageId: string, action: ActionId) => void`, `onActiveActionsChange: (messageId: string, active: ActionId[]) => void`, `copyText`/`speakText: string | (() => string)`, `icons: Partial<Record<ActionType, ReactNode>>`.
 
 ### ActionType
 
@@ -211,22 +213,25 @@ The bar follows the [WAI-ARIA toolbar pattern](https://www.w3.org/WAI/ARIA/apg/p
 
 ## Themes
 
-Twelve built-in themes: four color families (light, dark, neon, olive) × three shapes (pill, soft, sharp).
+Fifteen built-in themes: five color families (light, dark, neon, olive, violet) × three shapes (pill, soft, sharp).
 
-| Theme         | Shape                       |
-| ------------- | --------------------------- |
-| `light-pill`  | Light, fully rounded        |
-| `light-soft`  | Light, slightly rounded     |
-| `light-sharp` | Light, square corners       |
-| `dark-pill`   | Dark, fully rounded         |
-| `dark-soft`   | Dark, slightly rounded      |
-| `dark-sharp`  | Dark, square corners        |
-| `neon-pill`   | Neon glow, fully rounded    |
-| `neon-soft`   | Neon glow, slightly rounded |
-| `neon-sharp`  | Neon glow, square corners   |
-| `olive-pill`  | Olive, fully rounded        |
-| `olive-soft`  | Olive, slightly rounded     |
-| `olive-sharp` | Olive, square corners       |
+| Theme          | Shape                       |
+| -------------- | --------------------------- |
+| `light-pill`   | Light, fully rounded        |
+| `light-soft`   | Light, slightly rounded     |
+| `light-sharp`  | Light, square corners       |
+| `dark-pill`    | Dark, fully rounded         |
+| `dark-soft`    | Dark, slightly rounded      |
+| `dark-sharp`   | Dark, square corners        |
+| `neon-pill`    | Neon glow, fully rounded    |
+| `neon-soft`    | Neon glow, slightly rounded |
+| `neon-sharp`   | Neon glow, square corners   |
+| `olive-pill`   | Olive, fully rounded        |
+| `olive-soft`   | Olive, slightly rounded     |
+| `olive-sharp`  | Olive, square corners       |
+| `violet-pill`  | Violet, fully rounded       |
+| `violet-soft`  | Violet, slightly rounded    |
+| `violet-sharp` | Violet, square corners      |
 
 ```tsx
 <ActionBar theme="dark-sharp" ... />

@@ -26,3 +26,6 @@ export type ThemeName =
   | 'olive-pill'
   | 'olive-soft'
   | 'olive-sharp'
+  | 'violet-pill'
+  | 'violet-soft'
+  | 'violet-sharp'
