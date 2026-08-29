@@ -108,3 +108,24 @@ export const OliveSharp: Story = {
     theme: "olive-sharp",
   },
 };
+
+export const VioletPill: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "violet-pill",
+  },
+};
+
+export const VioletSoft: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "violet-soft",
+  },
+};
+
+export const VioletSharp: Story = {
+  decorators: [(Story) => <Story />],
+  args: {
+    theme: "violet-sharp",
+  },
+};

@@ -2,7 +2,6 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": ["src/stories/**/*.stories.tsx"],
   "project": ["src/**/*.{ts,tsx}", ".storybook/**/*.ts", "scripts/**/*.ts"],
-  "ignoreFiles": ["scripts/gentypes.ts"],
   "ignoreIssues": {
     "src/themes/index.ts": ["exports"],
     "src/types/index.ts": ["types"]
